@@ -4,8 +4,8 @@
   "description": "직원들의 사진을 관리할 수 있는 사진 관리자 서비스를 만들어 보세요.",
   "scripts": {
     "dev": "parcel ./src/html/*.html",
-    "build": "parcel build ./src/html/*.html --no-source-maps --public-url https://jihongkyu.github.io/staffList",
-    "deploy": "push-dir --dir=dist--branch=gh-pages"
+    "build": "parcel build ./src/html/*.html --no-source-maps",
+    "vercel": "vercel dev"
   },
   "keywords": [],
   "author": "",
@@ -28,6 +28,7 @@
     "process": "^0.11.10",
     "punycode": "^1.4.1",
     "querystring-es3": "^0.2.1",
-    "stream-browserify": "^3.0.0"
+    "stream-browserify": "^3.0.0",
+    "vercel": "^32.1.0"
   }
 }
