@@ -8,15 +8,16 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  height: 100vh;
+  min-height: 950px;
 }
 
 .wrapper {
   background-color: white;
   border-radius: 8px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 50px;
-  width: 100%;
+  padding: 25px 50px;
+  width: 90%;
   max-width: 600px;
 }
 
@@ -149,22 +150,9 @@ body {
   height: 100%;
 }
 
-.error {
-  color: red;
+.message {
   margin: 5px;
   font-size: 0.75rem;
-  display: none;
-}
-
-.success {
-  color: green;
-  margin: 5px;
-  font-size: 0.75rem;
-  display: none;
-}
-
-.active {
-  display: block;
 }
 
 /* 768px 이하 화면 크기에 대한 스타일 */

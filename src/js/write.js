@@ -2,10 +2,10 @@ import AWS from 'aws-sdk';
 import dotenv from 'dotenv';
 
 dotenv.config();
+const URL = 'https://hong-upload-image.s3.ap-northeast-2.amazonaws.com';
 const element = ['name', 'email', 'phone', 'address', 'image'];
 const write = {};
-const errorMessage = {};
-const successMessage = {};
+const Message = {};
 const title = document.querySelector('.title');
 const getAddressBtn = document.getElementById('get-address-btn');
 const previewImage = document.querySelector('.preview-image');
@@ -13,20 +13,18 @@ const deleteImageBtn = document.querySelector('.delete-image-btn');
 const submitBtn = document.getElementById('submit-button');
 let getItem = JSON.parse(localStorage.getItem('infos'));
 let latelyInfo = JSON.parse(localStorage.getItem('lately-info'));
-let referrer = document.referrer.split('/'); // 전에 어떤 페이지에서 왔는지 확인
-referrer = referrer[referrer.length - 1].replace('.html', '');
+let referrer = document.referrer.split('/').pop().replace('.html', ''); // 전에 어떤 페이지에서 왔는지 확인
 let uploadFile = 'undefined.png';
 let oldImage;
 let infos = [];
 let isValid;
 element.forEach((el) => {
-  errorMessage[el] = document.getElementById(`${el}-error-message`);
-  successMessage[el] = document.getElementById(`${el}-success-message`);
+  Message[el] = document.getElementById(`${el}-message`);
   write[el] = document.getElementById(el);
 });
 
 write['address'].disabled = true;
-previewImage.src = `https://hong-upload-image.s3.ap-northeast-2.amazonaws.com/${uploadFile}`;
+previewImage.src = `${URL}/${uploadFile}`;
 
 // localStorage 안에 값이 있는지 확인하고 있다면 값 보존
 if (getItem) {
@@ -39,10 +37,9 @@ if (referrer === 'profile') {
   // 수정하기
   uploadFile = latelyInfo['imageUrl'].split('/')[3]; // 원래 이미지의 이름
   oldImage = uploadFile;
-  write['name'].value = latelyInfo['name'];
-  write['email'].value = latelyInfo['email'];
-  write['phone'].value = latelyInfo['phone'];
-  write['address'].value = latelyInfo['address'];
+  element.forEach((el) => {
+    if (el !== 'image') write[el].value = latelyInfo[el];
+  });
   previewImage.src = latelyInfo['imageUrl'];
 
   title.innerText = '임직원 수정';
@@ -71,59 +68,71 @@ function uploadFileChange(e) {
 // 사진 삭제 함수
 function deleteImageFunc() {
   uploadFile = 'undefined.png';
-  previewImage.src = `https://hong-upload-image.s3.ap-northeast-2.amazonaws.com/${uploadFile}`;
+  previewImage.src = `${URL}/${uploadFile}`;
   write['image'].value = '';
 }
 
 // 이름 유효성 검사
 function nameIsValid() {
+  const nameMessage = Message['name'];
+
   if (!write['name'].value) {
-    errorMessage['name'].classList.add('active');
-    successMessage['name'].classList.remove('active');
-    errorMessage['name'].innerText = '이름을 작성해주세요.';
+    nameMessage.innerText = '이름을 작성해주세요.';
+    nameMessage.style.color = 'red';
     isValid = false;
   } else {
-    errorMessage['name'].classList.remove('active');
-    successMessage['name'].classList.add('active');
-    successMessage['name'].innerText = 'Success!';
+    nameMessage.innerText = 'Success!';
+    nameMessage.style.color = 'green';
   }
 }
 
 // 이메일 유효성 검사
 function emailIsValid() {
+  const emailMessage = Message['email'];
+
   if (!write['email'].value) {
-    errorMessage['email'].classList.add('active');
-    successMessage['email'].classList.remove('active');
-    errorMessage['email'].innerText = '이메일을 작성해주세요.';
+    emailMessage.innerText = '이메일을 작성해주세요.';
+    emailMessage.style.color = 'red';
     isValid = false;
   } else if (!write['email'].value.includes('@')) {
-    errorMessage['email'].classList.add('active');
-    successMessage['email'].classList.remove('active');
-    errorMessage['email'].innerText = '이메일을 형식에 맞춰 작성해주세요.';
+    emailMessage.innerText = '이메일을 형식에 맞춰 작성해주세요.';
+    emailMessage.style.color = 'red';
     isValid = false;
   } else {
-    errorMessage['email'].classList.remove('active');
-    successMessage['email'].classList.add('active');
-    successMessage['email'].innerText = 'Success';
+    emailMessage.innerText = 'Success';
+    emailMessage.style.color = 'green';
   }
 }
 
 // 휴대폰 번호 유효성 검사
 function phoneIsValid() {
+  const phoneMessage = Message['phone'];
+
   if (!write['phone'].value) {
-    errorMessage['phone'].classList.add('active');
-    successMessage['phone'].classList.remove('active');
-    errorMessage['phone'].innerText = '휴대폰 번호를 입력해주세요.';
+    phoneMessage.innerText = '휴대폰 번호를 입력해주세요.';
+    phoneMessage.style.color = 'red';
     isValid = false;
   } else if (write['phone'].value.length !== 11) {
-    errorMessage['phone'].classList.add('active');
-    successMessage['phone'].classList.remove('active');
-    errorMessage['phone'].innerText = '휴대폰 번호 11자리를 입력해주세요.';
+    phoneMessage.innerText = '휴대폰 번호 11자리를 입력해주세요.';
+    phoneMessage.style.color = 'red';
     isValid = false;
   } else {
-    errorMessage['phone'].classList.remove('active');
-    successMessage['phone'].classList.add('active');
-    successMessage['phone'].innerText = 'Success';
+    phoneMessage.innerText = 'Success';
+    phoneMessage.style.color = 'green';
+  }
+}
+
+// 주소 유효성 검사
+function addressIsValid() {
+  const addressMessage = Message['address'];
+
+  if (!write['address'].value) {
+    addressMessage.innerText = '주소를 입력해주세요.';
+    addressMessage.style.color = 'red';
+    isValid = false;
+  } else {
+    addressMessage.innerText = 'Success';
+    addressMessage.style.color = 'green';
   }
 }
 
@@ -136,18 +145,8 @@ function isInputValid() {
   emailIsValid();
   // 휴대폰 번호 검사
   phoneIsValid();
-
   // 주소 검사
-  if (!write['address'].value) {
-    errorMessage['address'].classList.add('active');
-    successMessage['address'].classList.remove('active');
-    errorMessage['address'].innerText = '주소를 입력해주세요.';
-    isValid = false;
-  } else {
-    errorMessage['address'].classList.remove('active');
-    successMessage['address'].classList.add('active');
-    successMessage['address'].innerText = 'Success';
-  }
+  addressIsValid();
 }
 
 // 주소 찾기 API
@@ -212,12 +211,12 @@ function createStaff() {
   if (uploadFile !== 'undefined.png') onFileUpload();
 
   const item = {
-    id: new Date().getTime(),
+    id: String(new Date().getTime()),
     name: write['name'].value,
     email: write['email'].value,
     phone: write['phone'].value,
     address: write['address'].value,
-    imageUrl: `https://hong-upload-image.s3.ap-northeast-2.amazonaws.com/${uploadFile.name ?? uploadFile}`
+    imageUrl: `${URL}/${uploadFile.name ?? uploadFile}`
   };
 
   infos.push(item);
@@ -240,7 +239,7 @@ function editStaff() {
       el['email'] = write['email'].value;
       el['phone'] = write['phone'].value;
       el['address'] = write['address'].value;
-      el['imageUrl'] = `https://hong-upload-image.s3.ap-northeast-2.amazonaws.com/${uploadFile.name ?? uploadFile}`;
+      el['imageUrl'] = `${URL}/${uploadFile.name ?? uploadFile}`;
 
       saveToLatelyLocalStorage(el);
     }

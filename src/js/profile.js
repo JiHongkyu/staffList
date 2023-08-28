@@ -1,19 +1,25 @@
+import FormatPhone from '../components/FormatPhone';
+
 const profileName = document.querySelector('.name');
 const profileEmail = document.querySelector('.email');
 const profilePhone = document.querySelector('.phone');
 const profileAddress = document.querySelector('.address');
 const profileImage = document.querySelector('.image');
 const staffInfoEdit = document.querySelector('.staff-info-edit');
-const data = JSON.parse(localStorage.getItem('lately-info'));
-const phone1 = data['phone'].slice(0, 3);
-const phone2 = data['phone'].slice(3, 7);
-const phone3 = data['phone'].slice(7);
+let data;
 
-profileName.innerText = data.name;
-profileEmail.innerText = data.email;
-profilePhone.innerText = `${phone1}-${phone2}-${phone3}`;
-profileAddress.innerText = data.address;
-profileImage.src = data.imageUrl;
+try {
+  data = JSON.parse(localStorage.getItem('lately-info'));
+
+  profileName.innerText = data.name;
+  profileEmail.innerText = data.email;
+  profilePhone.innerText = FormatPhone(data['phone']);
+  profileAddress.innerText = data.address;
+  profileImage.src = data.imageUrl;
+} catch (error) {
+  alert('로컬 스토리지에서 데이터를 가져오는 동안 에러 발생: ' + error);
+  location.href = './index.html';
+}
 
 staffInfoEdit.addEventListener('click', function () {
   location.href = './write.html';
