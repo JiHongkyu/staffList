@@ -48,16 +48,16 @@ HTML, CSS, Javascript로 만든 직원 관리 시스템
 
 ### 1. 리스트 페이지
 
-![img](https://github.com/JiHongkyu/staffList/raw/main/src/assets/image/%EB%A6%AC%EC%8A%A4%ED%8A%B8%ED%8E%98%EC%9D%B4%EC%A7%80.gif)
+![img](./src/assets/image/리스트페이지.gif)
 
 - `table`태그로 리스트 구현
 - 리스트 목록 `hover`시 구분가능하도록 리스트 색 변경
 
-![img](https://github.com/JiHongkyu/staffList/raw/main/src/assets/image/%EA%B2%80%EC%83%89.gif)
+![img](./src/assets/image/검색.gif)
 
 - Debounce를 활용하여 검색 기능 구현
 
-![img](https://github.com/JiHongkyu/staffList/raw/main/src/assets/image/%EB%A6%AC%EC%8A%A4%ED%8A%B8%ED%8E%98%EC%9D%B4%EC%A7%80%EB%B2%84%ED%8A%BC.gif)
+![img](./src/assets/image/리스트페이지버튼.gif)
 
 - 리스트 목록 클릭 시 나오는 모달창 구현
 - 모달창과 버튼: 애니메이션으로 구현
@@ -66,7 +66,7 @@ HTML, CSS, Javascript로 만든 직원 관리 시스템
 
 ### 2. 직원 등록 페이지
 
-![img](https://github.com/JiHongkyu/staffList/raw/main/src/assets/image/%EB%93%B1%EB%A1%9D%ED%8E%98%EC%9D%B4%EC%A7%80.gif)
+![img](./src/assets/image/등록페이지.gif)
 
 - 유효성 검사 코드 작성
 - 주소 API활용
@@ -76,25 +76,25 @@ HTML, CSS, Javascript로 만든 직원 관리 시스템
 
 ### 3. 직원 상세 페이지
 
-![img](https://github.com/JiHongkyu/staffList/raw/main/src/assets/image/%EC%83%81%EC%84%B8%ED%8E%98%EC%9D%B4%EC%A7%80.png)
+![img](./src/assets/image/상세페이지.png)
 
 - 직원 사진과 정보가 담긴 프로필 페이지 구현
 
 ### 4. 직원 수정 페이지
 
-![img](https://github.com/JiHongkyu/staffList/raw/main/src/assets/image/%EC%88%98%EC%A0%95%ED%8E%98%EC%9D%B4%EC%A7%80.gif)
+![img](./src/assets/image/수정페이지.gif)
 
 - 직원 정보, 사진 수정 기능 구현
 
 ### 5. 모바일 반응형
 
-![img](https://github.com/JiHongkyu/staffList/raw/main/src/assets/image/%EB%AA%A8%EB%B0%94%EC%9D%BC%EB%B0%98%EC%9D%91%ED%98%95.gif)
+![img](./src/assets/image/모바일반응형.gif)
 
 - `@media`를 사용하여 모바일 UI 구현
 
 # 🙄 User Flow
 
-![img](https://github.com/JiHongkyu/staffList/raw/main/src/assets/image/userflow.png)
+![img](./src/assets/image/userflow.png)
 
 # ✍ 개선 사항
 
