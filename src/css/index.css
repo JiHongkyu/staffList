@@ -1,0 +1,516 @@
+body {
+  height: 100vh;
+  min-height: 844px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+}
+
+.wrapper {
+  width: 90%;
+  max-width: 1400px;
+  height: auto;
+  padding: 30px 100px 10px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/********** Header **********/
+header .page-title .title {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+/********** main **********/
+main {
+  width: 100%;
+  height: 100%;
+}
+
+.staff-control-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+/********** 임직원 등록 버튼 **********/
+.staff-control-wrap .staff-enroll {
+  width: 200px;
+  height: 60px;
+
+  margin-right: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #7b9acc;
+  position: relative;
+}
+
+.staff-control-wrap .staff-enroll:hover {
+  background-image: none;
+  background-color: #fcf6f5;
+}
+
+.staff-control-wrap .staff-enroll a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fcf6f5;
+}
+
+.staff-control-wrap .staff-enroll:hover a {
+  color: #7b9acc;
+}
+
+.staff-enroll::before,
+.staff-enroll::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #7b9acc;
+  transition: all 0.3s ease;
+}
+
+.staff-enroll::before {
+  width: 0%;
+  height: 2px;
+}
+
+.staff-enroll:hover::before {
+  width: 100%;
+}
+
+.staff-enroll::after {
+  width: 2px;
+  height: 0%;
+}
+
+.staff-enroll:hover::after {
+  height: 100%;
+}
+
+.staff-enroll a::before,
+.staff-enroll a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #7b9acc;
+  transition: all 0.3s ease;
+}
+
+.staff-enroll a::before {
+  width: 0%;
+  height: 2px;
+}
+
+.staff-enroll a::after {
+  width: 2px;
+  height: 0%;
+}
+
+.staff-enroll:hover a::before {
+  width: 100%;
+}
+
+.staff-enroll:hover a::after {
+  height: 100%;
+}
+
+.search-input {
+  font-size: 1rem;
+  outline: none;
+  border: 2px solid #767676;
+}
+.search-input:hover {
+  box-shadow: 0px 1px 5px 0 #ccc;
+}
+
+.staff-list-wrap {
+  width: 100%;
+  height: 600px;
+  font-size: 0.875rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/********** 스크롤 바 커스텀 **********/
+.staff-list-wrap::-webkit-scrollbar {
+  width: 8px;
+}
+
+.staff-list-wrap::-webkit-scrollbar-thumb {
+  height: 30%;
+  background: #6bb7f5;
+  border-radius: 10px;
+}
+
+.staff-list-wrap::-webkit-scrollbar-track {
+  background: rgba(33, 122, 244, 0.1);
+  border-radius: 10px;
+}
+
+table {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+table thead tr th {
+  padding: 20px 0;
+}
+
+table tbody tr {
+  width: 100%;
+  cursor: pointer;
+  border-top: 1px solid #ccc;
+  position: relative;
+}
+
+table tbody tr:hover::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(204, 204, 204, 0.15);
+}
+
+table tbody tr td {
+  padding: 10px;
+}
+
+table tbody tr td:nth-child(1) {
+  width: 18%;
+  height: 190px;
+}
+
+table tbody tr td:nth-child(2) {
+  width: 15%;
+}
+
+table tbody tr td img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/********** Modal **********/
+.modal {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #00000050;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+.modal-content {
+  width: 500px;
+  height: 300px;
+  background-color: #fefefe;
+  border-radius: 6px;
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  animation: modal-active 0.3s forwards;
+}
+
+.modal-cancel {
+  margin-top: -5%;
+  margin-left: 90%;
+  cursor: pointer;
+}
+
+.modal-cancel:hover {
+  color: red;
+  animation: modal-cancel 0.5s alternate infinite;
+}
+
+.modal-content h1 {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.modal-btns {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.modal-btns div {
+  width: 40%;
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.left-btn {
+  background-color: #4f4f4f;
+  transition: all 0.5s ease-in-out;
+}
+
+.left-btn:hover {
+  background-color: #3a3a3a;
+  animation: modal-btn 0.5s forwards;
+}
+
+.right-btn {
+  background-color: #dc3c50;
+  transition: all 0.5s ease-in-out;
+}
+
+.right-btn:hover {
+  background-color: #c93647;
+  animation: modal-btn 0.5s forwards;
+}
+
+.success-img {
+  margin-bottom: -150px;
+}
+.success-img i {
+  color: green;
+  font-size: 3.125rem;
+}
+
+.active {
+  display: flex;
+}
+
+@keyframes modal-cancel {
+  0% {
+    transform: translateY(0px);
+  }
+
+  100% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes modal-active {
+  0% {
+    transform: scale3d(0, 0, 0);
+  }
+  50% {
+    transform: scale3d(0.8, 0.8, 1);
+  }
+  80% {
+    transform: scale3d(1.2, 1.2, 1);
+  }
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes modal-btn {
+  50% {
+    transform: scale3d(0.8, 0.8, 1);
+  }
+  80% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .wrapper {
+    max-width: 90%;
+    padding: 30px;
+  }
+
+  header .page-title .title {
+    font-size: 2rem;
+  }
+
+  .staff-control-wrap {
+    margin: 30px auto;
+  }
+
+  .staff-control-wrap .staff-enroll {
+    width: 120px;
+  }
+
+  .staff-list-wrap {
+    font-size: 0.69rem;
+  }
+
+  table thead tr th {
+    padding: 15px 0;
+  }
+
+  table tbody tr {
+    padding: 10px;
+  }
+
+  table tbody tr td:nth-child(1) {
+    height: 120px;
+  }
+
+  .modal-content {
+    width: 400px;
+    height: 250px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .staff-control-wrap {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .staff-control-wrap .staff-enroll {
+    height: 50px;
+    margin-bottom: 10px;
+  }
+
+  .staff-control-wrap .staff-enroll a {
+    font-size: 0.825rem;
+  }
+
+  table thead {
+    display: none;
+  }
+
+  table tbody tr {
+    width: 100%;
+    padding: 0;
+  }
+
+  table tbody tr td {
+    padding: 5px;
+  }
+
+  table tbody tr td:nth-child(1) {
+    width: 35%;
+  }
+
+  table tbody tr td:nth-child(2),
+  table tbody tr td:nth-child(3),
+  table tbody tr td:nth-child(4),
+  table tbody tr td:nth-child(5) {
+    width: auto;
+    display: block;
+    text-align: left;
+    height: 100%;
+    margin: 10px;
+    border-bottom: 1px dotted #ccc;
+  }
+
+  .modal-content h1 {
+    font-size: 1rem;
+  }
+
+  .modal-cancel {
+    font-size: 1rem;
+    margin-top: -3%;
+  }
+
+  .modal-btns {
+    flex-direction: column;
+  }
+
+  .modal-btns div {
+    padding: 10px;
+    margin: 5px 0;
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  table tbody tr td:nth-child(1) {
+    width: 40%;
+  }
+
+  table tbody tr td:nth-child(2),
+  table tbody tr td:nth-child(3),
+  table tbody tr td:nth-child(4),
+  table tbody tr td:nth-child(5) {
+    margin: 5px;
+  }
+
+  .modal-content {
+    width: 300px;
+    height: 200px;
+  }
+
+  .modal-cancel {
+    font-size: 0.75rem;
+    margin-top: -2.5%;
+  }
+
+  .success-img {
+    margin-bottom: -90px;
+  }
+  .success-img i {
+    color: green;
+    font-size: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .staff-control-wrap div.staff-enroll {
+    width: 100px;
+    height: 40px;
+  }
+
+  .staff-list-wrap {
+    font-size: 0.5rem;
+  }
+
+  table tbody tr td {
+    padding: 5px;
+  }
+
+  .modal-btns div {
+    width: 60%;
+    font-size: 0.625rem;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .modal-content {
+    width: 200px;
+    height: 150px;
+  }
+
+  .modal-content h1 {
+    font-size: 0.75rem;
+  }
+
+  .modal-cancel {
+    font-size: 0.5rem;
+    margin-top: -1%;
+    margin-right: 4px;
+  }
+
+  .success-img {
+    margin-bottom: -60px;
+  }
+  .success-img i {
+    color: green;
+    font-size: 30px;
+  }
+}
