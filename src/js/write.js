@@ -1,7 +1,6 @@
 import AWS from 'aws-sdk';
-import dotenv from 'dotenv';
 
-dotenv.config();
+const { ACCESS_KEY, SECRET_ACCESS_KEY } = process.env;
 const URL = 'https://hong-upload-image.s3.ap-northeast-2.amazonaws.com';
 const element = ['name', 'email', 'phone', 'address', 'image'];
 const write = {};
@@ -159,26 +158,28 @@ function getAddress() {
 }
 
 function onFileUpload() {
-  const ACCESS_KEY = process.env.ACCESS_KEY;
-  const SECRET_ACCESS_KEY = process.envSECRET_ACCESS_KEY;
-  const REGION = 'ap-northeast-2';
-  const S3_BUCKET = 'hong-upload-image';
+  const awsConfig = {
+    ACCESS_KEY,
+    SECRET_ACCESS_KEY,
+    REGION: 'ap-northeast-2',
+    S3_BUCKET: 'hong-upload-image'
+  };
 
   AWS.config.update({
-    accessKeyId: ACCESS_KEY,
-    secretAccessKey: SECRET_ACCESS_KEY
+    accessKeyId: awsConfig.ACCESS_KEY,
+    secretAccessKey: awsConfig.SECRET_ACCESS_KEY
   });
 
   const myBucket = new AWS.S3({
-    params: { Bucket: S3_BUCKET },
-    region: REGION
+    params: { Bucket: awsConfig.S3_BUCKET },
+    region: awsConfig.REGION
   });
 
   const file = uploadFile;
   const params = {
     ACL: 'public-read',
     Body: file,
-    Bucket: S3_BUCKET,
+    Bucket: awsConfig.S3_BUCKET,
     Key: file.name
   };
 
