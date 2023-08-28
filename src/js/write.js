@@ -1,7 +1,6 @@
 import AWS from 'aws-sdk';
-import dotenv from 'dotenv';
 
-dotenv.config();
+const { ACCESS_KEY, SECRET_ACCESS_KEY } = process.env;
 const URL = 'https://hong-upload-image.s3.ap-northeast-2.amazonaws.com';
 const element = ['name', 'email', 'phone', 'address', 'image'];
 const write = {};
@@ -159,8 +158,8 @@ function getAddress() {
 }
 
 function onFileUpload() {
-  const ACCESS_KEY = process.env.ACCESS_KEY;
-  const SECRET_ACCESS_KEY = process.env.SECRET_ACCESS_KEY;
+  const ACCESS_KEY = ACCESS_KEY;
+  const SECRET_ACCESS_KEY = SECRET_ACCESS_KEY;
   const REGION = 'ap-northeast-2';
   const S3_BUCKET = 'hong-upload-image';
 
