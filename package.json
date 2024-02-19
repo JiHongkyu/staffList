@@ -4,7 +4,7 @@
   "description": "직원들의 사진을 관리할 수 있는 사진 관리자 서비스를 만들어 보세요.",
   "scripts": {
     "dev": "parcel ./src/html/*.html",
-    "build": "parcel build ./src/html/*.html --no-source-maps",
+    "build": "parcel build ./src/html/*.html --no-source-maps --public-url /. --no-cache",
     "vercel": "vercel dev"
   },
   "keywords": [],
